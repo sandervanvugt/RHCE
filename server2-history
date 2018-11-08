@@ -1,0 +1,228 @@
+yum install ipa-client
+ipa-client-install
+nmtui
+vim /etc/resolv.conf 
+vi /etc/resolv.conf 
+ipa-client-install
+ping server1.example.com
+dig server1.example.com
+showmount -e server1.example.com
+klist -k
+yum groups install -y "Network File System Client" 
+yum install -y vim bash-completion
+systemctl enable nfs-secure
+systemctl start nfs-secure
+systemctl status nfs-secure
+mkdir /securenfs
+mount -o sec=krb5p server1.example.com:/secureshare /securenfs
+mount
+su - ldapuser1
+cd /securenfs/
+ls
+touch wortlel
+ls -l
+cd 
+vim /etc/fstab 
+yum search iscsi
+yum install iscsi-iniator-utils
+yum install iscsi-initiator-utils
+cd /etc/iscsi/
+cat initiatorname.iscsi 
+man iscsiadm
+cd /var/lib/iscsi/
+ls
+yum install tree -y
+tree
+iscsiadm --mode discoverydb --type sendtargets --portal 192.168.4.221 --discover
+tree
+pwd
+man iscsiadm
+lsscsi 
+iscsiadm --mode node --targetname iqn.2018-10.com.example:disk --portal 192.168.4.221:3260 --login
+lsscs
+lsscsi 
+tree
+reboot
+lsscsi
+poweroff
+lsscsi
+fdisk /dev/sdb
+vgcreate vgsan /dev/sdb1
+lvcreate -n lvsan -l 100%FREE vgsan
+mkfs.ext4 /dev/vgsan/lvsan 
+vim /etc/fstab
+mkdir /iscsi
+mount -a
+reboot
+vim /etc/fstab
+reboot
+mount
+mount
+cat /etc/fstab
+cd /proc/sys
+systemctl status iscsi
+systemctl status iscsid
+cd ..
+ls
+cd sys
+ls
+cd net
+ls
+cd ipv4
+ls
+ping localhost
+pwd
+cat icmp_echo_ignore_all 
+echo 1 > icmp_echo_ignore_all
+ping localhost
+pwd
+vim /etc/sysctl.conf 
+sysctl -a | wc
+sysctl -a | less
+cat ip_forward
+vim /etc/sysctl.conf 
+firewall-cmd --zone=public --add-rich-rule='rule family=ipv4 source address=192.168.4.223 reject' 
+firewall-cmd --list-all
+firewall-cmd --zone=public --add-rich-rule='rule service name=http log limit value=3/m accept' 
+firewall-cmd --permanent --add-rich-rule='rule protocol value=igmp accept' 
+less /etc/protocols 
+man firewalld.richlanguage
+systemctl restart firewalld
+history
+firewall-cmd --list-all
+mount -o username=lisa //server1/sambashare /mnt
+mount
+man smb.conf
+man smbd
+man smb
+man -k samba
+cd /etc/sysconfig/
+ls
+vim samba 
+ps aux | grep smb
+ps aux | grep samba
+systemctl status smb
+mkdir /mnt/multiuser
+vim /root/smb-multiuser
+vim /etc/fstab
+mount -a
+vim /etc/fstab
+mount -a
+mount
+cd /mnt/multiuser/
+touch abc
+ls -l
+cd multiuser/
+touch abv
+pwd
+adduser linda
+su - linda
+umount /mnt/multiuser/multiuser/
+umount /mnt/multiuser/
+cd /
+umount /mnt/multiuser/
+rmdir /mnt/multiuser/
+vim /etc/fstab
+cd
+ls
+vim /etc/fstab
+mkdir /multi
+mount -a
+mount
+cd /multi/
+ls
+su - linda
+history
+systemctl list-unit-files 
+systemctl list-unit-files | grep autom
+vim /etc/auto.master
+which cifscreds
+less /usr/bin/cifscreds 
+file /usr/bin/cifscreds 
+poweroff
+vim /etc/fstab
+yum groups install "Network File System Client" 
+yum groups list
+yum groups list hidden | less
+ip a
+nmcli con add type team con-name team0 ifname team0 config '{"runner":{"name":"roundrobin"}}'
+nmcli con mod team0 ipv4.addresses 10.10.0.2/24
+nmcli con mod team0 ipv4.method manual
+nmcli con add type team-slave ifname ens37 master team0
+nmcli con add type team-slave ifname ens38 master team0
+nmcli con up team-slave-ens37
+nmcli con up team-slave-ens38
+ip a
+nmcli con up team0
+ip a
+ping 10.10.0.1
+nmcli con mod ens33 ipv6.addresses fd01::220/64
+nmcli con mod ens33 ipv6.method manual
+nmcli con up ens33
+vim /etc/resolv.conf 
+dig example.com
+host server1
+cd /etc/postfix/
+ls
+vim main.cf
+vim master.cf 
+postconf -e 'relayhost=[server1.example.com]'
+postconf inet_interfaces
+postconf -e inet_interfaces=loopback-only
+postconf mynetworks
+postconf -e 'mydestination='
+postconf -e 'inet_protocols=ipv4'
+postconf -e 'mydomain=example.com' 
+systemctl reload postfix
+mail -s test1 root@server1.example.com < .
+yum provides */mail | less
+yum install mailx
+mail -s test1 root@server1.example.com < .
+mail -s test2 root@server1.example.com < .
+postqueue -p
+tail /var/log/maillog 
+postqueue -p
+postqueue -f
+postqueue -p
+nc
+yum install netcat
+yum provides */nc
+yum install nmap-ncat
+nc -vz server1.example.com 25
+ip a
+nmcli con mod team0 ipv6.addresses fd01::222/64
+nmcli con up team0
+ip a
+reboot
+ip a
+nmcli con mod team0 ipv6.method manual
+reboot
+ip a
+ping6 fd01::222
+ping 10.10.0.1
+systemctl stop firewalld
+ping6 fd01::222
+ping6 fd01::221
+ip a
+ping6 fe80::697f:f55f:8208:2e6c
+ping6 fe80::697f:f55f:8208:2e6c/64
+ping6 'fe80::697f:f55f:8208:2e6c/64'
+ping6 'fe80::697f:f55f:8208:2e6c'
+cd /proc/sys/net/ipv6/team0
+cd /proc/sys/net/ipv6/conf.team0
+cd /proc/sys/net/ipv6/conf/team0
+echo 0 > accept_dad 
+ping6 fd01::222
+ping6 fd01::222@team0
+ping6 fd01::222 @team0
+nmcli connection modify team0 ipv6.never-default false
+nmcli connection modify ens33 ipv6.never-default true
+ping6 fd01::222
+systemctl restart NetworkManager
+ping6 fd01::222
+pwd
+cd ..
+cd ens33/
+echo 1 > disable_ipv6 
+ping6 fd01::222
+poweroff

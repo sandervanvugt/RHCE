@@ -1,0 +1,489 @@
+cat /etc/resolv.conf 
+nmtui
+cat /etc/resolv.conf 
+yum install ipa-client-install
+yum install ipa-client
+ipa-client-install 
+su - ldapuser1
+mkdir /nfsdata
+yum install -y vim
+vim /etc/exports
+systemctl start nfs-server
+systemctl enable nfs-server
+showmount -e localhost
+firewall-cmd --list-all
+firewall-cmd --add-service nfs --permanent
+firewall-cmd --reload
+firewall-cmd --list-all
+firewall-cmd --get-services
+firewall-cmd --add-service rpc-bind --permanent
+firewall-cmd --add-service mountd --permanent
+firewall-cmd --reload
+history
+scp labipa.example.com:/root/count* .
+ls -l
+./countdown 10
+ls -l /etc/krb5.keytab 
+ipa-getkeytab -s labipa.example.com -p nfs/server1.example.com -k /etc/krb5.keytab
+kinit admin
+ipa-getkeytab -s labipa.example.com -p nfs/server1.example.com -k /etc/krb5.keytab
+klist -k 
+klist -k
+mkdir /secureshare
+semanage fcontext -a -t nfs_t "/secureshare(/.*)?"
+yum provides */semanage
+yum install bash-completion policycoreutils-python
+semanage fcontext -a -t nfs_t "/secureshare(/.*)?"
+restorecon -Rv /secureshare/
+ls -ld /secureshare/
+chmod 777 /secureshare/
+ls -ld /secureshare/
+vim /etc/exports
+systemctl restart nfs-server
+systemctkl start nfs-secure-server
+systemctl start nfs-secure-server
+systemctl enable nfs-secure-server
+systemctl enable nfs-server
+showmount -e localhost
+cat /etc/exports
+vim /etc/sssd/sssd.conf 
+poweroff
+nmtui
+lsblk
+yum install targetcli
+./countdown 11
+targetcli 
+systemctl enable target
+systemctl status target
+systemctl start target
+systemctl status target
+history
+firewall-cmd --help | grep add-port
+firewall-cmd --add-port=3260/tcp
+firewall-cmd --add-port=3260/tcp --permanent
+firewall-cmd --list-all
+firewall-cmd --get-services
+poweroff
+cd /var/log
+ls -ltr
+tail messages 
+less messages
+netstat -tulpen
+yum provides */netstat
+yum install net-tools
+netstat -tulpen
+w
+ss -atn | grep 22
+ipa 
+ip a
+exit
+systemctl status target
+targetcli
+./countdown 1
+targetctl
+targetcli
+./countdown 1
+firewall-cmd --list-all
+firewall-cmd --get-services
+firewall-cmd --add-service sip
+firewall-cmd --list-all
+firewall-cmd --reload
+firewall-cmd --list-all
+firewall-cmd --add-service sip --permanent
+firewall-cmd --list-all
+firewall-cmd --reload
+firewall-cmd --list-all
+cd /usr/lib/firewalld/services/
+ls
+vim sip.xml 
+cp sip.xml /etc/firewalld/services/sander.xml
+vim /etc/firewalld/services/sander.xml
+firewall-cmd --get-services
+firewall-cmd --reload
+firewall-cmd --get-services
+cd
+man -k firewalld
+man firewalld.richlanguage
+firewall-cmd --add-rich-rule 'rule family=ipv4 source address=192.168.4.230 log accept' 
+cd /var/log
+ls -l
+firewall-cmd --add-rich-rule 'rule family=ipv4 source address=192.168.4.223 log accept' 
+ls -lrt
+tail messages 
+ssh -v -p 2222 192.168.4.223
+ssh -v -p 2233 192.168.4.223
+firewall-cmd --help | grep forward-port
+cd
+./countdown 11
+man firewalld.richlanguage | grep forward
+yum install -y samba samba-client cifs-utils
+for i in lisa linda anna anouk smbnobody; do useradd -s /bin/nologin $i; done
+groupadd sambagroup
+for i in lisa linda anna anouk smbnobody; do usermod -aG sambagroup $i; done
+for i in lisa linda anna anouk smbnobody; do smbpasswd $i; done
+for i in lisa linda anna anouk smbnobody; do smbpasswd -a $i; done
+yum groups list
+yum groups list hidden
+yum groups list hidden | less
+history
+smbpasswd -a sander
+mkdir -p /data/sambashare
+chgrp sambagroup /data/sambashare
+semanage
+yum provides */semanage
+ls -ld /data/sambashare/
+chmod g=rwx /data/sambashare/
+ls -ld /data/sambashare/
+ls -Zd /data/sambashare/
+semanage fcontext -a -t samba_share_t "/data/sambashare(/.*)?" 
+ls -Zd /data/sambashare/
+restorecon -Rv /data/sambashare/
+ls -Zd /data/sambashare/
+yum search semanage
+vim /etc/samba/smb.conf
+testparm
+firewamm-cmd --add-service samba --permanent; firewall-cmd --reload
+firewall-cmd --add-service samba --permanent; firewall-cmd --reload
+systemctl start smb; systemctl enable smb
+smbclient -L localhost
+systemctl status msb
+systemctl status smb
+man smbd
+./countdown 11
+vim /etc/samba/smb.conf
+systemctl restart smb
+ss -tua
+netstat -tulpen
+vim /etc/samba/smb.conf
+systemctl restart smb
+netstat -tulpen | grep smb
+./countdown 11
+getenforce
+vim /etc/sysconfig/selinux 
+yum install -y vsftpd
+yum install lftp
+systemctl start vsftpd
+systemctl enable vsftpd
+lftp localhost
+setenforce permissive
+lftp localhost
+cd /var/ftp/
+chmod 777 pub
+ls -l
+vim /etc/vsftpd/vsftpd.conf 
+systemctl restart vsftpd
+getenforce
+lftp localhost
+setenforce enforcing
+lftp localhost
+grep sealert /var/log/messages
+yum provides */sealert
+yum install setroubleshoot-server.x86_64 
+reboot
+lftp localhost
+grep sealert /var/log/messages
+grep AVC /var/log/audit/audit.log 
+history
+grep sealert /var/log/messages
+sealert -l 273e7370-40d9-4afd-b8f4-947b06b7479b
+sealert -l 273e7370-40d9-4afd-b8f4-947b06b7479b | less
+getsebool -a | wc
+getsebool -a | grep ftp
+setsebool -P ftpd_anon_write on
+getsebool -a | grep ftp
+sealert -l 273e7370-40d9-4afd-b8f4-947b06b7479b | less
+cd /var/ftp
+ls -Z
+semanage fcontext -a -t public_content_rw_t "/var/ftp/pub(/.*)?"
+restorecon -Rv /var/ftp/pub
+getenforce
+lftp localhost
+history
+cd
+poweroff
+yum groups install "Network File System Client" 
+cd /etc/sysconfig/network-scripts/
+ls
+vim route-ens33
+ip route show
+systemctl restart network
+ip route show
+ip a
+cd
+man nmcli-examples
+man teamd.conf | grep active
+man nmcli-examples
+nmcli connection add type team ifname team0 config '{"runner": {"name":"roundrobin"}}'
+ip a s
+nmcli con modify team-team0 ipv4.addresses 10.10.0.1/24
+nmcli con modify team-team0 ipv4.method manual
+man nmcli-examples
+nmcli con add type ethernet ifname ens37 master team0 
+nmcli con add type team-slave ifname ens38 master team0 
+ip a s
+nmcli con up team0
+nmcli con up team-team0 
+nmcli  con up team-slave-ens37
+nmcli  con up team-slave-ens38
+ip a
+reboot
+ip a
+systemctl status target
+ls -R /
+cd /
+grep -R root *
+find / -grep root {} \;
+find / -exec grep root {} \;
+ls -R /
+cat /dev/sda
+ip a
+cd /etc/sysconfig/network-scripts/
+ls
+cat ifcfg-team-team0 
+cat ifcfg-team-slave-ens37 
+cat ifcfg-team-slave-ens38
+teamdctl team0 state
+nmcli dev dis ens37
+teamdctl team0 state
+nmcli dev en ens37
+nmcli dev connect ens37
+cd /usr/share/doc/teamd-1.27/
+ls
+cd example_configs/
+ls
+cat roundrobin.conf 
+cd ../example_ifcfgs/
+ls
+cd 1/
+ls
+cat ifcfg-eth1 
+cat ifcfg-team_test0 
+pwd
+man teamd.conf
+cd
+./countdown 11
+nmcli con show
+nmcli con mod ens33 ipv6.addresses fd01::210/64
+nmcli con mod ens33 ipv6.method manual
+nmcli con up ens33
+ip a
+ping6 fd01::210
+ping6 fd01::220
+ip 6 route show
+ip --help
+ip -6 route show
+nmcli con modify ens33 +ipv6.dns ::2
+nmcli con modify ens33 -ipv6.dns ::2
+ip -6 addr show
+ping6 ff02::1
+ping6 ff02::1 %ens33
+ping6 --help
+ping6 ff02::1%ens33
+yum install -y httpd
+vim /etc/hosts
+vim /etc/httpd/conf/httpd.conf 
+cd /etc/httpd/conf.d/
+ls
+vim account.example.com.conf
+mkdir -p /web/account.example.com
+mkdir -p /web/sales.example.com
+vim /web/account.example.com/index.html
+vim /web/sales.example.com/index.html
+cd /web
+ls -Z
+ps Zaux | grep http
+systemctl start httpd
+ps Zaux | grep http
+curl http://sales.example.com
+setenforce 0
+curl http://sales.example.com
+setenforce 1
+curl http://sales.example.com
+man semanage-fcontext
+semanage fcontext -a -t httpd_sys_content_t "/web(/.*)?"
+restorecon -Rv /web
+getenforce
+curl http://sales.example.com
+cd /etc/httpd/conf.d
+cp account.example.com.conf sales.example.com.conf
+vim sales.example.com.conf 
+systemctl restart httpd
+cp account.example.com.conf sales.example.com.conf
+curl http://sales.example.com
+curl http://account.example.com
+yum install httpd-manual
+ls
+vim manual.conf 
+systemctl restart httpd
+firewall-cmd --list-all
+firewall-cmd --add-service httpd
+firewall-cmd --add-service http
+firewall-cmd --add-service http --permanent
+cd
+httpd -S
+./countdown 11
+vim countdown 
+cd /etc/httpd/conf.d/
+vim account.example.com.conf 
+systemctl restart httpd
+yum install elinks
+elinks http://account.e
+elinks http://account.example.com
+vim account.example.com.conf 
+htpasswd -c /etc/httpd/htpasswd linda
+htpasswd -c /etc/httpd/htpasswd lisa
+htpasswd /etc/httpd/htpasswd linda
+cd
+elinks http://account.example.com
+yum -y install crypto-utils mod_ssl
+yum -y install rngd
+genkey server1.example.com
+cd /etc/httpd/conf.d/
+ls
+vim ssl.conf 
+vim default-ssl.conf
+vim /var/www/html/index.html
+systemctl restart httpd
+systemctl status httpd
+firewall-cmd --add-service https
+firewall-cmd --add-service https --permanent
+firewall-cmd --list-all
+grep sealert /var/log/messages
+cd /etc/pki/tls/
+ls
+cd private/
+ls -l
+ls -lZ
+cd /var/log/
+ls
+setenforce 0
+systemctl stop firewalld
+systemctl start firewalld
+setenforce 1
+cd
+./countdown 11
+mkdir /webapps
+vim /webapps/hello.pl
+chmod 755 /webapps/hello.pl 
+semanage fcontext -a -t httpd_sys_script_exec_t "/webapps(/.*)?"
+restorecon -R /webapps
+vim /etc/httpd/conf/httpd.conf 
+systemctl restart httpd
+elinks http://localhost/cgi-bin/hello.pl
+vim /etc/httpd/conf/httpd.conf 
+systemctl restart httpd
+elinks http://localhost/cgi-bin/hello.pl
+history
+getsebool -a | grep httpd
+getsebool -a | grep httpd | grep cgi
+cd /var/log
+ls
+cd httpd/
+ls -lrt
+tail error_log 
+tail access_log 
+vim /etc/httpd/conf/httpd.conf 
+systemctl restart httpd
+elinks http://localhost/cgi-bin/hello.pl
+vim /etc/httpd/conf/httpd.conf 
+systemctl restart httpd
+elinks http://localhost/nope/hello.pl
+mkdir /nope
+cp /webapps/* /nope/
+ls /nope/
+vim /nope/hello.pl 
+cd ..
+cd /
+semanage -a -t httpd_sys_script_exec_t "/nope(/.*)?"
+semanage fcontext -a -t httpd_sys_script_exec_t "/nope(/.*)?"
+restorecon -Rv /nope
+vim /nope/hello.pl 
+history
+vim /etc/httpd/conf/httpd.conf 
+systemctl restart httpd
+elinks http://localhost/nope/hello.pl
+history
+elinks http://localhost/cgi-bin/hello.pl
+yum install -y unbound
+systemctl start unbound
+systemctl enable unbound
+vim /etc/unbound/unbound.conf 
+netstat -tulpen | grep 54
+netstat -tulpen
+vim /etc/unbound/unbound.conf 
+unbound-checkconf 
+systemctl restart unbound
+systemctl status unbound
+firewall-cmd --add-service dns
+firewall-cmd --add-service dns --permanent
+cd
+./countdown 1
+yum install -y mariadb mariadb-server
+systemctl start mariadb
+systemctl enable mariadb
+ss -tua | grep mysql
+mysql_secure_installation 
+mysql -u root -p
+mysql -u julia -p
+mysql -u root -p
+firewall-cmd --get-services | grep my
+vim /usr/lib/firewalld/services/mysql.xml 
+mysqldump -u root -p videos > /root/videos-db.dump
+ls
+less videos-db.dump 
+strings /root/videos-db.dump 
+mysql -u root -p
+mysql -u root -p videos < /root/videos-db.dump 
+mysql -u root -p videos
+postconf -e 'inet_interfaces=all'
+postconf -e 'mydestination=example.com,server1.example.com'
+postconf -e 'inet_protocols=ipv4'
+firewall-cmd --add-service smtp --permanent
+firewall-cmd --add-service smtp
+systemctl restart postfix
+mail
+yum install -y mailx; mail
+mail
+firewall-cmd --remove-service smtp
+mail
+tail /var/log/maill
+tail /var/log/maillog 
+firewall-cmd --reload
+mail
+tail /var/log/maillog 
+history
+firewall-cmd --remove-service smtp
+./countdown 15
+./countdown 60
+ip a
+nmcli con mod team0 ipv6.addresses fd01::221/64
+nmcli con mod team-team0 ipv6.addresses fd01::221/64
+nmcli con mod team-team0 ipv6.method manual
+nmcli con up team-team0 
+ip a
+ping6 fd01::221
+reboot
+systemctl stop firewalld
+sysctl -a net.ipv6.conf.team0.accept_dad = 0
+cd /proc/sys/net/ipv6/conf/team0/
+ls
+echo 0 > accept_dad
+ip -6 route show
+ip route del fd01::/64 dev ens33
+ip route show
+ip -6 route show
+ip a
+ping6 fd01::221
+cd
+targetcli
+cd /etc/target
+ls
+less saveconfig.json 
+targetcli --help
+man targetcli
+cd
+./countdown 2
+vim test
+awk '{gsub(/blah/hallo)}'  test
+sed 2q /etc/passwd
+poweroff
